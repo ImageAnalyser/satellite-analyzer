@@ -64,4 +64,11 @@ class ImageAnalyzer:
         self.Y = asarray(signal)
         self.width = ymax - ymin
         self.height = xmax - xmin
-   
+  
+    def post_lecture(self):
+        STD = std(self.Y, 1)
+        MM = mean(self.Y, 1)
+        TT, self.NN = self.Y.shape
+        if self.centred:
+            for t in xrange(0, TT):
+                self.Y[t, :] = (self.Y[t, :] - MM[t]) / STD[t] 
