@@ -22,4 +22,13 @@ class ImageAnalyzer:
                  bande=0,
                  verbosity=2
                  ):
+        self.output_dir = output_dir
+        if not os.path.isdir(output_dir):
+            print('creating output directory...')
+            os.mkdir(output_dir)
+        self.images = images
+        self.facteur = facteur
+        self.centred = centred
+        self.bande = bande
+        pyhrf.verbose.set_verbosity(verbosity)
    
