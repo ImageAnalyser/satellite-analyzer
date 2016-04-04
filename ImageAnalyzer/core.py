@@ -11,3 +11,8 @@ from pylab import (
     show, legend, hold, matshow, colorbar, reshape, savefig, std, mean, title,
     plot, figure, find, figtext, suptitle
 )
+
+class ImageAnalyzer:
+    output_dir = 'ParaguayOut/'
+
+   
