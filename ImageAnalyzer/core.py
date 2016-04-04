@@ -50,4 +50,18 @@ class ImageAnalyzer:
                 else:
                     image[i, j] = 0
         return image
+
+    def lecture_data(self, xmin, xmax, ymin, ymax, start=0, end=-1):
+        images = self.images[start:end]
+        signal = []
+        for image in images:
+            print(image)
+            labels = imread(image)
+            labels = labels[xmin:xmax, ymin:ymax, self.bande].astype(float)
+            if (self.facteur > 1):
+                labels = labels / self.facteur
+            signal.append(labels.flatten())
+        self.Y = asarray(signal)
+        self.width = ymax - ymin
+        self.height = xmax - xmin
    
