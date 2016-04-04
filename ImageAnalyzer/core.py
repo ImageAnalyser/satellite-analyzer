@@ -72,3 +72,59 @@ class ImageAnalyzer:
         if self.centred:
             for t in xrange(0, TT):
                 self.Y[t, :] = (self.Y[t, :] - MM[t]) / STD[t] 
+
+            
+                
+    ###############################
+    # intialisation des paramètres
+    ###############################
+    def init_params(self,
+                    beta=0.1,
+                    sigmaH=0.01,
+                    v_h_facture=0.1,
+                    dt=1,
+                    Thrf=4,
+                    TR=1,
+                    K=2,
+                    M=1,
+                    ):
+		"""
+		initialization parameters for the analysis method ConditionalNRLHist
+		
+		:param beta: paramétre de regularité spaciale 
+        :type beta: float
+        :param sigmaH: paramétre de lissage de la HRF
+        :type sigmaH: float 
+        :param v_h_facteur:hyper parametre 
+        :type v_h_facture: float
+        :param dt: pas d'echelle Temporel de la HRF
+        :type dt: float   
+        :param Thrf: durée
+        :type Thrf: int
+        :param TR: temps de repetition
+        :type TR: int
+        :param K: nombre de class
+        :type K: int
+        :param M: nombre de coordonnées experimontales
+        :type M: int
+		"""
+        self.beta = beta
+        self.sigmaH = sigmaH
+        self.v_h = v_h_facture * sigmaH
+        # beta_Q = 0.5
+        self.dt = dt
+        self.Thrf = Thrf
+        self.TR = TR
+        # nf=1
+        # for i in range (0,Y.shape[0]) :
+        #  figure(nf)
+        #  PL_img =reshape(Y[i,:],(height,width))
+        #  matshow(PL_img,cmap=get_cmap('gray'))
+        #  colorbar()
+        #  nf=nf+1
+        #  print('save image ' + str(i))
+        #  savefig(outDir+'Image'+str(i)+'bande=' +str(bande)+'_inondation.png')
+        #  #savefig(outDir+'Image'+str(i)+'bande=' +str(bande)+'.png')
+        #####################################
+        self.K = K
+        self.M = M
