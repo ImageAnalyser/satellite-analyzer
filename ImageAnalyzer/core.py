@@ -73,6 +73,43 @@ class ImageAnalyzer:
             for t in xrange(0, TT):
                 self.Y[t, :] = (self.Y[t, :] - MM[t]) / STD[t] 
 
+    def ConditionalNRLHist(self, nrls, labels):
+        """Analyze method
+
+        :param nrls: 
+        :type nrls: 
+        :param labels:
+        :type labels:
+        :rtype: Resultlist of figures 
+        """
+        figures = []
+        for m in range(0, self.M):
+            q = labels[m, 1, :]
+            ind = find(q >= 0.5)
+            ind2 = find(q < 0.5)
+            r = nrls[ind]
+            xmin, xmax = min(nrls), max(nrls)
+            lnspc = linspace(xmin, xmax, 100)
+            m, s = stats.norm.fit(r)
+            pdf_g = stats.norm.pdf(lnspc, m, s)
+            r = nrls[ind2]
+            # xmin, xmax = min(r), max(r)
+            lnspc2 = linspace(xmin, xmax, 100)  # len(r)
+            m, s = stats.norm.fit(r)
+            pdf_g2 = stats.norm.pdf(lnspc2, m, s)
+
+            fg = figure()
+            plot(lnspc, pdf_g / len(pdf_g), label="Norm")
+            hold(True)
+            plot(lnspc2, pdf_g2 / len(pdf_g2), 'k', label="Norm")
+            legend(['Posterior: Activated', 'Posterior: Non Activated'])
+            # xmin, xmax = min(xt), max(xt)
+            # ind2 = find(q <= 0.5)
+            figures.append(fg)
+        if self.shower:
+            show()
+        return figures
+
             
                 
     ###############################
@@ -88,10 +125,10 @@ class ImageAnalyzer:
                     K=2,
                     M=1,
                     ):
-		"""
-		initialization parameters for the analysis method ConditionalNRLHist
+	"""
+	initialization parameters for the analysis method ConditionalNRLHist
 		
-		:param beta: paramétre de regularité spaciale 
+        :param beta: paramétre de regularité spaciale 
         :type beta: float
         :param sigmaH: paramétre de lissage de la HRF
         :type sigmaH: float 
@@ -107,7 +144,7 @@ class ImageAnalyzer:
         :type K: int
         :param M: nombre de coordonnées experimontales
         :type M: int
-		"""
+	"""
         self.beta = beta
         self.sigmaH = sigmaH
         self.v_h = v_h_facture * sigmaH
