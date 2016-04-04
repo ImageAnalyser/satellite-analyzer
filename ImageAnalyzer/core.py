@@ -199,10 +199,10 @@ class ImageAnalyzer:
                 Onsets={'nuages': array([0])},
                 scale=1,
                 ):
-		"""
-		allow to generate figures	
+	"""
+	allow to generate figures	
 		
-		:param nItMin: Minimum number of iteration
+	:param nItMin: Minimum number of iteration
         :type nItMin: int
         :param nItMax: Maximum number of iteration
         :type nItMax: int 
@@ -310,3 +310,83 @@ class ImageAnalyzer:
         if self.shower == 1:
             show()
         return fgs        
+
+    def gen_nrl(self):
+        """
+        generation of nrl figures
+        
+        :param hh:
+        :type hh:
+        :param z1:
+        :type z1:
+        :param z2:
+        :type z2:
+        :param fg:
+        :type fg:
+        :param fig:
+        :type fig:
+        """
+        figures = []
+        # figure(55)
+        # matshow(reshape(sigma_epsilone,(height,width)))
+        # colorbar()
+        for m in range(0, self.M):
+            hh = self.m_H
+            z1 = self.m_A[:, m]
+            z2 = reshape(z1, (self.height, self.width))
+            fg = figure((self.nf + 1) * 110)
+            fig, ax = subplots()
+            # figure Nrl ########,cmap=get_cmap('gray')
+            data = ax.matshow(z2, cmap=get_cmap('gray'))
+            fig.colorbar(data)
+            title("nrl", fontsize='xx-large')
+            figtext(0.4, 0.04,
+                    'bande = ' + str(self.bande) +
+                    ' beta =' + str(self.beta) +
+                    ' sigma = ' + str(self.sigmaH) +
+                    ' pl = ' + str(self.pl) +
+                    ' dt = ' + str(self.dt) +
+                    ' thrf = ' + str(self.Thrf),
+                    fontsize='x-large')
+            figures.append(fig)
+            # title("Est: m = " + str(m))
+            if self.save == 1:
+                savefig(self.output_dir + 'nrl bande =' + str(self.bande) + 'beta=' + str(self.beta) + 'sigma= ' +
+                        str(self.sigmaH) + 'pl=' + str(self.pl) + 'dt=' + str(self.dt) + 'thrf' + str(self.Thrf) + '.png')
+            q = self.q_Z[m, 1, :]
+            q2 = reshape(q, (self.height, self.width))
+            # q2 = seuillage(q2,0.5)
+            fig, ax = subplots()
+            data = ax.matshow(q2, cmap=get_cmap('gray'))
+            fig.colorbar(data)
+            title("nrl", fontsize='xx-large')
+            figtext(0.4, 0.04,
+                    'bande = ' + str(self.bande) +
+                    ' beta =' + str(self.beta) +
+                    ' sigma = ' + str(self.sigmaH) +
+                    ' pl = ' + str(self.pl) +
+                    ' dt = ' + str(self.dt) +
+                    ' thrf = ' + str(self.Thrf),
+                    fontsize='x-large')
+            figures.append(fig)
+        #   for k in range(0,1):
+        #       q = q_Z[m,k,:]
+        #       q2 = reshape(q,(height,width))
+        #       figure ((nf+1) *38)
+        #       matshow(q2,cmap=get_cmap('gray'))
+        #       colorbar()
+        #       # figure Q_sans seuil ###########
+        #       if save == 1 :
+        #           savefig(outDir+'Q_Sans_seuil bande =' +str(bande)+'beta='+str(beta)+'sigma= '+str(sigmaH)+'pl='+str(pl)+ 'dt='+str(dt)+'thrf'+str(Thrf)+'.png')
+        #       q2=seuillage(q2,0.5)
+        #       figure((nf+1) *102)
+        #       # figure Q_z avec seuil ###########
+        #
+        #       imshow(q2,cmap=cm.gray)
+        #       colorbar()
+        #       if save == 1 :
+        #           savefig(outDir+'Q_avec_seuil bande =' +str(bande)+'beta='+str(beta)+'sigma= '+str(sigmaH)+'pl='+str(pl)+ 'dt='+str(dt)+'thrf'+str(Thrf)+'.png')
+        if self.shower == 1:
+            show()
+        return figures
+
