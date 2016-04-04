@@ -4,9 +4,10 @@
 A tool to analyze satellite images and to detect changes in well defined periods 
 ## Installation
 First, if git is not installed ,install it from your system packages:
-	$ sudo apt-get install git <!-- on ubuntu -->
-Clone the version of satellite-analyzer via github.In the folder where you want to create ---
-the satellite-analyzer repository,use the command: ---
+	$ sudo apt-get install git <!--on ubuntu-->
+Clone the version of satellite-analyzer via github.In the folder where you want to create
+--- 
+the satellite-analyzer repository,use the command: 
   	$ git clone  http://github.com/ImageAnalyser/satellite-analyzer.git satellite-analyzer 
 In the directory where the satellite-analyzer has been decompressed, you can install it 
 by using the command line:
