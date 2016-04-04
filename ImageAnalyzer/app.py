@@ -42,6 +42,17 @@ class App:
         self.imageScrolled = self.builder.get_object('scrolledwindow2')
         self.imageList.connect('row-activated', lambda w, row: self.show_image(row.data))
         
+        self.xmin = self.builder.get_object('xmin2')
+        self.xmax = self.builder.get_object('xmax2')
+        self.ymin = self.builder.get_object('ymin2')
+        self.ymax = self.builder.get_object('ymax2')
+        self.facteur = self.builder.get_object('facteur')
+        self.bande = self.builder.get_object('bande')
+
+        self.notebook = self.builder.get_object('notebook1')
+        self.imageBox = self.builder.get_object('scrolledwindow5')
+        self.resultBox = self.builder.get_object('scrolledwindow6')
+
     def run(self):
         """connect signals and run Gtk window"""
         self.builder.connect_signals(EventHandler(self))
