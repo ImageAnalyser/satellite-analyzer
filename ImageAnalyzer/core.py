@@ -12,6 +12,16 @@ from pylab import (
     plot, figure, find, figtext, suptitle
 )
 
+from scipy import stats
+from matplotlib.pyplot import get_cmap, cm, subplots
+from pyhrf.boldsynth.hrf import getCanoHRF
+from pyhrf.graph import graph_from_lattice
+from pyhrf.vbjde.Utils import Main_vbjde_Extension_TD
+from pyhrf.boldsynth.boldsynth.scenarios import RegularLatticeMapping
+import pyhrf.verbose
+from tifffile import imread
+
+
 class ImageAnalyzer:
     output_dir = 'ParaguayOut/'
 
