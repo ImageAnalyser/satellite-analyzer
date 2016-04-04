@@ -41,4 +41,13 @@ class ImageAnalyzer:
         self.centred = centred
         self.bande = bande
         pyhrf.verbose.set_verbosity(verbosity)
+
+    def seuillage(self, image):  # , seuil):
+        for i in range(0, image.shape[0]):
+            for j in range(0, image.shape[1]):
+                if image[i, j] > 0.5:
+                    image[i, j] = 1
+                else:
+                    image[i, j] = 0
+        return image
    
