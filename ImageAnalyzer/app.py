@@ -53,6 +53,21 @@ class App:
         self.imageBox = self.builder.get_object('scrolledwindow5')
         self.resultBox = self.builder.get_object('scrolledwindow6')
 
+        self.sigmah = self.builder.get_object('sigmah')
+        self.beta = self.builder.get_object('beta')
+        self.thrf = self.builder.get_object('thrf')
+        self.vh = self.builder.get_object('vh')
+        self.dt = self.builder.get_object('dt')
+        self.tr = self.builder.get_object('tr')
+        self.nitmin = self.builder.get_object('nitmin')
+        self.nitmax = self.builder.get_object('nitmax')
+        self.m = self.builder.get_object('m')
+        self.k = self.builder.get_object('k')
+        self.scale = self.builder.get_object('scale')
+        self.pl = self.builder.get_object('pl')
+        self.shape = (0, 5000)
+
+
     def run(self):
         """connect signals and run Gtk window"""
         self.builder.connect_signals(EventHandler(self))
@@ -123,6 +138,39 @@ class App:
             self.add_image(name)
         self.imageList.show_all()
         self.show_image(names[-1])
+
+    def add_result(self, name, fig):
+        """add new row with name of image and save object fig on attr data
+
+        :param name: path of file to added
+        :type name: str
+        :param fig: l'objet figure genereté par imread
+        :type fig: matplotlib.figure.Figure
+        """
+        it = Gtk.ListBoxRow()
+        it.data = fig
+        it.add(Gtk.Label(name))
+        self.resultList.add(it)
+        self.resultList.show_all()
+
+    def show_result(self, fig):
+        """show data image on resultScrolled
+        
+        :param fig: figure result from list
+        :type fig: matplotlib.figure.Figure 
+        """
+        old_viewport = self.resultScrolled.get_child()
+        if old_viewport:
+            old_viewport.destroy()
+        old_viewport = self.resultBox.get_child()
+        if old_viewport:
+            old_viewport.destroy()
+        canvas = FigureCanvas(fig)
+        self.resultScrolled.add_with_viewport(canvas)
+        toolbar = NavigationToolbar(canvas, self.win)
+        self.resultBox.add_with_viewport(toolbar)
+        self.resultScrolled.show_all()
+
         
 if __name__ == '__main__':
     app = App()
