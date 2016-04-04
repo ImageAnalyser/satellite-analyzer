@@ -165,3 +165,148 @@ class ImageAnalyzer:
         #####################################
         self.K = K
         self.M = M
+        
+    def set_flags(self, pl=1, save=0, savepl=1, shower=0, nf=1):
+		"""
+		initialization parameters for saving results		
+		
+		:param pl: low frequency component 
+        :type pl: int
+        :param save: variable to indicate the state of outputs
+        :type save: int 
+        :param savepl: pl are saved in the directory OUTDIR
+        :type savepl: int
+        :param shower: show or not images results
+        :type shower: int   
+        :param nf: 
+        :type nf: int
+        """
+		# pl =0 sans PL ,pl =1 avec PL
+        self.pl = pl
+        # save = 1  les outputs sont sauvgardés
+        self.save = save
+        # savepl les PL sont sauvgardés dans le repertoir outDir
+        self.savepl = savepl
+        self.shower = shower
+
+        self.nf = nf
+
+    def gen_hrf(self,
+                nItMin=30,
+                nItMax=30,
+                estimateSigmaH=0,
+                estimateBeta=0,
+                Onsets={'nuages': array([0])},
+                scale=1,
+                ):
+		"""
+		allow to generate figures	
+		
+		:param nItMin: Minimum number of iteration
+        :type nItMin: int
+        :param nItMax: Maximum number of iteration
+        :type nItMax: int 
+        :param estimateSigmaH: estimation of sigmaH
+        :type estimateSigmaH: int
+        :param estimateBeta: estimation of Beta
+        :type estimateBeta: int   
+        :param scale: scale factor
+        :type scale: int
+        """
+        # estimationSigmah = 0 sans estimation de sigmh , estimationSigmah=1 estimation de sigmah
+        # estimateBeta = 0 sans estimation de beta , estimateBeta=1 estimation de beta
+        # construction Onsets
+        # Onsets = {'nuages' : array([1,6,7])}
+        areas = ['ra']
+        labelFields = {}
+        cNames = ['inactiv', 'activ']
+        spConf = RegularLatticeMapping((self.height, self.width, 1))
+        graph = graph_from_lattice(ones((self.height, self.width, 1), dtype=int))
+        J = self.Y.shape[0]
+        l = int(sqrt(J))
+
+        # NbIter, nrls_mean, hrf_mean, hrf_covar, labels_proba, noise_var, \
+        # nrls_class_mean, nrls_class_var, beta, drift_coeffs, drift,CONTRAST, CONTRASTVAR, \
+        # nrls_criteria, hrf_criteria,labels_criteria, nrls_hrf_criteria, compute_time,compute_time_mean, \
+        # nrls_covar, stimulus_induced_signal, density_ratio,density_ratio_cano, density_ratio_diff, density_ratio_prod, \
+        # ppm_a_nrl,ppm_g_nrl, ppm_a_contrasts, ppm_g_contrasts, variation_coeff = \
+        # jde_vem_bold_fast_python(pl,graph, Y, Onsets, Thrf, K,TR, beta, dt, estimateSigmaH, sigmaH,nItMax,nItMin,estimateBeta)
+        # FlagZ = 1
+        # q_Z = zeros((M,K,J),dtype=float64)
+        # NbIter,m_A, m_H, q_Z, sigma_epsilone, mu_k, sigma_k,Beta,L,PL,CONTRAST, CONTRASTVAR,cA,cH,cZ,cAH,cTime,cTimeMean,Sigma_A,XX = \
+        # Main_vbjde_Extension_TD(height,width,q_Z,FlagZ,pl,graph,Y,Onsets,Thrf,K,TR,beta,dt,scale,estimateSigmaH,sigmaH,nItMax,nItMin,estimateBeta)
+
+        # facteur = 1.0
+        # Y,height,width,bande = lecture_data(dataDir,2660,2730,2600,2680,bande,start,facteur,end)
+        # FlagZ = 0
+        # NbIter_f,m_A_f, m_H_f, q_Z_f, sigma_epsilone_f, mu_k_f, sigma_k_f,Beta_f,L_f,PL,CONTRAST, CONTRASTVAR,cA,cH,cZ,cAH,cTime,cTimeMean,Sigma_A,XX = \
+        # Main_vbjde_Extension_TD(height,width,q_Z,FlagZ,pl,graph,Y,Onsets,Thrf,K,TR,beta,dt,scale,estimateSigmaH,sigmaH,nItMax,nItMin,estimateBeta)
+
+        # ytild=PL
+        # matshow(reshape(m_A_f[:,0],(height,width)) - reshape(m_A[:,0],(height,width)),cmap=get_cmap('gray'))
+        # colorbar()
+
+        FlagZ = 1
+        q_Z0 = zeros((self.M, self.K, J), dtype=float64)
+        if not FlagZ:
+            q_Z0 = q_Z
+        FlagH = 1
+        TT, m_h = getCanoHRF(self.Thrf - self.dt, self.dt)
+        hrf0 = array(m_h).astype(float64)
+        Sigma_H0 = eye(hrf0.shape[0])
+        if not FlagH:
+            hrf0 = h_H
+            Sigma_H0 = Sigma_H
+
+        self.m_A, self.m_H, self.q_Z, sigma_epsilone, mu_k, sigma_k, Beta, PL, Sigma_A, XX, Sigma_H = \
+            Main_vbjde_Extension_TD(
+                FlagH, hrf0, Sigma_H0, self.height, self.width, q_Z0, FlagZ,
+                self.pl, graph, self.Y, Onsets, self.Thrf, self.K, self.TR,
+                self.beta, self.dt, scale,
+                estimateSigmaH, self.sigmaH, nItMin, estimateBeta)
+
+        fgs = self.ConditionalNRLHist(self.m_A, self.q_Z)
+
+        MMin = -1.0  # Y.min()
+        MMax = 1.0  # Y.max()
+        pas = (MMax - MMin) / 100
+        xx = arange(MMin, MMax, pas)
+        g0 = self.gaussian(xx, mu_k[0][0], sigma_k[0][0])
+        g1 = self.gaussian(xx, mu_k[0][1], sigma_k[0][1])
+        #
+        # figure(77)
+        # plot(xx,g0*pas, label='m=%.2f;v=%.2f' % (mu_k[0][0],sigma_k[0][0]))
+        # hold(True)
+        # plot(xx,g1*pas, label='m=%.2f;v=%.2f' % (mu_k[0][1],sigma_k[0][1]))
+        # legend()
+
+        # savgarde des PLs #
+        # if ((pl != 0 )and (savepl !=0 )) :
+        #   for i in range (0,ytild.shape[0]) :
+        #       figure(nf)
+        #       PL_img =reshape(ytild[i,:],(height,width))
+        #       matshow(PL_img,cmap=get_cmap('gray'))
+        #       colorbar()
+        #       nf=nf+1
+        #       savefig(outDir+'PL'+str(i)+'bande=' +str(bande)+'.png')
+
+        # savefig(outDir+'PL'+str(i)+'bande=' +str(bande)+'beta='+str(beta)+'sigma='+str(sigmaH)+'pl='+str(pl)+'dt='+str(dt)+'thrf'+str(Thrf)+'.png')
+        #
+        # figure Hrf #######
+        fgs.insert(0, figure((self.nf + 1) * 123))
+        title("hrf", fontsize='xx-large')
+        figtext(0.4, 0.04,
+                'bande = ' + str(self.bande) +
+                ' beta =' + str(self.beta) +
+                ' sigma = ' + str(self.sigmaH) +
+                ' pl = ' + str(self.pl) +
+                ' dt = ' + str(self.dt) +
+                ' thrf = ' + str(self.Thrf),
+                fontsize='x-large')
+        plot(self.m_H)
+        if self.save == 1:
+            savefig(self.output_dir + 'hrf bande =' + str(self.bande) + 'beta=' + str(self.beta) + 'sigma= ' +
+                    str(self.sigmaH) + 'pl=' + str(self.pl) + 'dt=' + str(self.dt) + 'thrf' + str(self.Thrf) + '.png')
+        if self.shower == 1:
+            show()
+        return fgs        
