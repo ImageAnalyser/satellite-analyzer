@@ -38,7 +38,11 @@ class App:
         self.win = self.builder.get_object('window1')
         self.win.about = self.builder.get_object('aboutdialog1')
 
-    
+    def run(self):
+        """connect signals and run Gtk window"""
+        self.builder.connect_signals(EventHandler(self))
+        self.win.show_all()
+        Gtk.main()
 
 if __name__ == '__main__':
     app = App()
