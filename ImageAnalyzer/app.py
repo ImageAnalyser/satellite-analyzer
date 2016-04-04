@@ -77,6 +77,42 @@ class App:
             self.ymax.set_range(self.ymin.get_value_as_int() + 1, self.shape[1])
 
         self.imageScrolled.show_all()
+        
+            # ajouter image dans la liste
+    def add_image(self, name):
+        """Add image to image list
+
+        :param name: image file path
+        :type name: str
+        """
+        i = 0
+        while self.imageList.get_row_at_index(i):
+            if self.imageList.get_row_at_index(i).data == name:
+                return
+            i += 1
+
+        it = Gtk.ListBoxRow()
+        it.data = name
+        name_shorten = name.split('/')[-1]
+        name_shorten = name_shorten.split('.')[0]
+        try:
+            name_shorten = name_shorten.split('_')[3]
+        except:
+            pass
+        it.add(Gtk.Label(name_shorten))
+        self.imageList.add(it)
+
+    def add_images(self, names):
+        """Add images to image list then show last one
+
+        :param names: image files path list
+        :type names: array of str
+        """
+        for name in names:
+            self.add_image(name)
+        self.imageList.show_all()
+        self.show_image(names[-1])
+        
 if __name__ == '__main__':
     app = App()
     app.run()
