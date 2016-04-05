@@ -71,11 +71,7 @@ class EventHandler():
             self.app.add_images(chooser.get_filenames())
         chooser.destroy()
 
-    def on_about_clicked(self, *args):
-        """show about dialog"""
-        self.app.win.about.show_all()
-        # .run
-        # .destroy
+   
 
     def on_about_closed(self, *args):
         """close about dialog"""
