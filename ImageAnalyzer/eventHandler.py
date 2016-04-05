@@ -31,3 +31,11 @@ class EventHandler():
         self.app.xmax.set_value(2730)
         self.app.ymin.set_value(2600)
         self.app.ymax.set_value(2680)
+        self.app.beta.set_value(0.1)
+        self.app.sigmah.set_value(0.01)
+        self.app.vh.set_value(0.1)
+        self.app.dt.set_value(1)
+        self.app.thrf.set_value(4)
+        self.app.tr.set_value(1)
+        
+
