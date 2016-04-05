@@ -27,3 +27,7 @@ class EventHandler():
         old_viewport = self.app.resultScrolled.get_child()
         if old_viewport:
             old_viewport.destroy()
+        self.app.xmin.set_value(2658)
+        self.app.xmax.set_value(2730)
+        self.app.ymin.set_value(2600)
+        self.app.ymax.set_value(2680)
