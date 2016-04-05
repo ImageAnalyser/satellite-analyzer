@@ -118,7 +118,7 @@ class ImageAnalyzer:
     def init_params(self,
                     beta=0.1,
                     sigmaH=0.01,
-                    v_h_facture=0.1,
+                    v_h_facteur=0.1,
                     dt=1,
                     Thrf=4,
                     TR=1,
@@ -147,7 +147,7 @@ class ImageAnalyzer:
 	"""
         self.beta = beta
         self.sigmaH = sigmaH
-        self.v_h = v_h_facture * sigmaH
+        self.v_h = v_h_facteur * sigmaH
         # beta_Q = 0.5
         self.dt = dt
         self.Thrf = Thrf
