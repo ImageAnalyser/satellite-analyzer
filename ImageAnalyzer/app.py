@@ -73,6 +73,12 @@ class App:
         self.builder.connect_signals(EventHandler(self))
         self.win.show_all()
         Gtk.main()
+        
+    def filter_images(self, row, search):
+        if not search.get_text():
+            return True
+        else:
+            return search.get_text().strip().lower() in row.data
 
             # ajouter image dans View
     def show_image(self, name):
