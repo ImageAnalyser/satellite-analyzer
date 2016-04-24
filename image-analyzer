@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from ImageAnalyzer.app import App
+
+app = App()
+app.run()
