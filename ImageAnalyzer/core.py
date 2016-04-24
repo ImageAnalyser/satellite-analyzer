@@ -181,7 +181,7 @@ class ImageAnalyzer:
         :param nf: 
         :type nf: int
         """
-		# pl =0 sans PL ,pl =1 avec PL
+        # pl =0 sans PL ,pl =1 avec PL
         self.pl = pl
         # save = 1  les outputs sont sauvgardés
         self.save = save
