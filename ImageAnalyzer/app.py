@@ -30,18 +30,25 @@ class App:
 
     def __init__(self):
         """recuperation of graphical object"""
-        self.builder = Gtk.Builder()
+        self.builder = Gtk.Builder()   
 
         glade_file = os.path.join(os.path.dirname(__file__), 'app.glade')
         self.builder.add_from_file(glade_file)
 
         self.win = self.builder.get_object('window1')
         self.win.about = self.builder.get_object('aboutdialog1')
-        
+
         self.imageList = self.builder.get_object("listbox1")
         self.imageScrolled = self.builder.get_object('scrolledwindow2')
         self.imageList.connect('row-activated', lambda w, row: self.show_image(row.data))
-        
+
+        self.resultList = self.builder.get_object("listbox2")
+        self.resultScrolled = self.builder.get_object('scrolledwindow1')
+        self.resultList.connect('row-activated', lambda w, row: self.show_result(row.data))
+
+        self.search = self.builder.get_object('searchentry1')
+        self.imageList.set_filter_func(self.filter_images, self.search)
+
         self.xmin = self.builder.get_object('xmin2')
         self.xmax = self.builder.get_object('xmax2')
         self.ymin = self.builder.get_object('ymin2')
@@ -67,20 +74,19 @@ class App:
         self.pl = self.builder.get_object('pl')
         self.shape = (0, 5000)
 
-
     def run(self):
         """connect signals and run Gtk window"""
         self.builder.connect_signals(EventHandler(self))
         self.win.show_all()
         Gtk.main()
-        
+
     def filter_images(self, row, search):
         if not search.get_text():
             return True
         else:
             return search.get_text().strip().lower() in row.data
 
-            # ajouter image dans View
+    # ajouter image dans View
     def show_image(self, name):
         """Show image on image view
 
@@ -109,14 +115,15 @@ class App:
             self.ymax.set_range(self.ymin.get_value_as_int() + 1, self.shape[1])
 
         self.imageScrolled.show_all()
-        
-            # ajouter image dans la liste
+
+    # ajouter image dans la liste
     def add_image(self, name):
         """Add image to image list
 
         :param name: image file path
         :type name: str
         """
+
         i = 0
         while self.imageList.get_row_at_index(i):
             if self.imageList.get_row_at_index(i).data == name:
@@ -176,7 +183,6 @@ class App:
         toolbar = NavigationToolbar(canvas, self.win)
         self.resultBox.add_with_viewport(toolbar)
         self.resultScrolled.show_all()
-
         
 if __name__ == '__main__':
     app = App()

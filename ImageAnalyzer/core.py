@@ -51,28 +51,6 @@ class ImageAnalyzer:
                     image[i, j] = 0
         return image
 
-    def lecture_data(self, xmin, xmax, ymin, ymax, start=0, end=-1):
-        images = self.images[start:end]
-        signal = []
-        for image in images:
-            print(image)
-            labels = imread(image)
-            labels = labels[xmin:xmax, ymin:ymax, self.bande].astype(float)
-            if (self.facteur > 1):
-                labels = labels / self.facteur
-            signal.append(labels.flatten())
-        self.Y = asarray(signal)
-        self.width = ymax - ymin
-        self.height = xmax - xmin
-  
-    def post_lecture(self):
-        STD = std(self.Y, 1)
-        MM = mean(self.Y, 1)
-        TT, self.NN = self.Y.shape
-        if self.centred:
-            for t in xrange(0, TT):
-                self.Y[t, :] = (self.Y[t, :] - MM[t]) / STD[t] 
-
     def ConditionalNRLHist(self, nrls, labels):
         """Analyze method
 
@@ -110,22 +88,48 @@ class ImageAnalyzer:
             show()
         return figures
 
-            
-                
+    def lecture_data(self, xmin, xmax, ymin, ymax, start=0, end=-1):
+        images = self.images[start:end]
+        signal = []
+        for image in images:
+            print(image)
+            labels = imread(image)
+            labels = labels[xmin:xmax, ymin:ymax, self.bande].astype(float)
+            if (self.facteur > 1):
+                labels = labels / self.facteur
+            signal.append(labels.flatten())
+        self.Y = asarray(signal)
+        self.width = ymax - ymin
+        self.height = xmax - xmin
+
+    def gaussian(self, x, mu, sig):
+        return 1. / (sqrt(2. * pi) * sig) * exp(-power((x - mu) / sig, 2.) / 2)
+
+    def post_lecture(self):
+        STD = std(self.Y, 1)
+        MM = mean(self.Y, 1)
+        TT, self.NN = self.Y.shape
+        if self.centred:
+            for t in xrange(0, TT):
+                self.Y[t, :] = (self.Y[t, :] - MM[t]) / STD[t]
+                # Y[t,:] = (Y[t,:]  ) /STD[t]
+        # Y,height,width,bande = lecture_data(dataDir,100,200,150,250,0,start,facteur,end)
+        # Y = Y.astype(float)
+
     ###############################
     # intialisation des paramètres
     ###############################
     def init_params(self,
                     beta=0.1,
                     sigmaH=0.01,
-                    v_h_facteur=0.1,
+                    v_h_facture=0.1,
                     dt=1,
                     Thrf=4,
                     TR=1,
                     K=2,
                     M=1,
                     ):
-	"""
+        """
 	initialization parameters for the analysis method ConditionalNRLHist
 		
         :param beta: paramétre de regularité spaciale 
@@ -147,7 +151,7 @@ class ImageAnalyzer:
 	"""
         self.beta = beta
         self.sigmaH = sigmaH
-        self.v_h = v_h_facteur * sigmaH
+        self.v_h = v_h_facture * sigmaH
         # beta_Q = 0.5
         self.dt = dt
         self.Thrf = Thrf
@@ -165,12 +169,15 @@ class ImageAnalyzer:
         #####################################
         self.K = K
         self.M = M
-        
+
+    #####################
+    # flags
+    #####################
     def set_flags(self, pl=1, save=0, savepl=1, shower=0, nf=1):
-		"""
-		initialization parameters for saving results		
+        """
+	initialization parameters for saving results		
 		
-		:param pl: low frequency component 
+	:param pl: low frequency component 
         :type pl: int
         :param save: variable to indicate the state of outputs
         :type save: int 
@@ -199,7 +206,7 @@ class ImageAnalyzer:
                 Onsets={'nuages': array([0])},
                 scale=1,
                 ):
-	"""
+        """
 	allow to generate figures	
 		
 	:param nItMin: Minimum number of iteration
@@ -294,8 +301,8 @@ class ImageAnalyzer:
         #
         # figure Hrf #######
         fgs.insert(0, figure((self.nf + 1) * 123))
-        title("hrf", fontsize='xx-large')
-        figtext(0.4, 0.04,
+        title("Fonction de reponse", fontsize='xx-large')
+        figtext(0.2, 0.04,
                 'bande = ' + str(self.bande) +
                 ' beta =' + str(self.beta) +
                 ' sigma = ' + str(self.sigmaH) +
@@ -304,13 +311,10 @@ class ImageAnalyzer:
                 ' thrf = ' + str(self.Thrf),
                 fontsize='x-large')
         plot(self.m_H)
-        if self.save == 1:
-            savefig(self.output_dir + 'hrf bande =' + str(self.bande) + 'beta=' + str(self.beta) + 'sigma= ' +
-                    str(self.sigmaH) + 'pl=' + str(self.pl) + 'dt=' + str(self.dt) + 'thrf' + str(self.Thrf) + '.png')
         if self.shower == 1:
             show()
-        return fgs        
-
+        return fgs
+        
     def gen_nrl(self):
         """
         generation of nrl figures
@@ -339,8 +343,8 @@ class ImageAnalyzer:
             # figure Nrl ########,cmap=get_cmap('gray')
             data = ax.matshow(z2, cmap=get_cmap('gray'))
             fig.colorbar(data)
-            title("nrl", fontsize='xx-large')
-            figtext(0.4, 0.04,
+            title("Niveau de reponse", fontsize='xx-large')
+            figtext(0.2, 0.04,
                     'bande = ' + str(self.bande) +
                     ' beta =' + str(self.beta) +
                     ' sigma = ' + str(self.sigmaH) +
@@ -359,8 +363,8 @@ class ImageAnalyzer:
             fig, ax = subplots()
             data = ax.matshow(q2, cmap=get_cmap('gray'))
             fig.colorbar(data)
-            title("nrl", fontsize='xx-large')
-            figtext(0.4, 0.04,
+            title("Label d'activation", fontsize='xx-large')
+            figtext(0.2, 0.04,
                     'bande = ' + str(self.bande) +
                     ' beta =' + str(self.beta) +
                     ' sigma = ' + str(self.sigmaH) +
@@ -390,6 +394,10 @@ class ImageAnalyzer:
             show()
         return figures
 
+
+######################
+# lecture des données
+######################
 if __name__ == "__main__":
     imgs = ['Paraguay/' + f for f in sorted(os.listdir('Paraguay/'))]
     print(imgs)

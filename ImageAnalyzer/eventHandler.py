@@ -8,7 +8,7 @@ class EventHandler():
 
     def __init__(self, app):
         self.app = app
-   
+
     def on_quit_clicked(self, *args):
         """clean and close the app"""
         Gtk.main_quit(*args)
@@ -121,17 +121,22 @@ class EventHandler():
                                     nItMax=self.app.nitmax.get_value_as_int(),
                                     scale=self.app.scale.get_value_as_int(),
         )
+        self.app.add_result('fonction de réponse' , fgs1[0])
+        self.app.add_result('Mélange à posteriori' , fgs1[1])
         fgs2 = img_analyzer.gen_nrl()
-
-        i = 0
-        for fig in fgs1:
-            self.app.add_result('hrf' + str(i), fig)
-            i += 1
-        i = 0
-        for fig in fgs2:
-            self.app.add_result('nrl' + str(i), fig)
-            i += 1
+        self.app.add_result('Niveau de réponse' , fgs2[0])
+        self.app.add_result('Label activation' , fgs2[1])
         self.app.notebook.set_current_page(2)
+        #i = 0
+        #for fig in fgs1:
+            #self.app.add_result('fonction de reponse' , fig)
+            #self.app.add_result('Mélange a posteriori ' , fig)
+            #i += 1
+        #i = 0
+        #for fig in fgs2:
+            #self.app.add_result('nrl' + str(i), fig)
+            #i += 1
+        
 
     def on_item_delete(self, widget, ev, *args):
         if ev.keyval == Gdk.KEY_Delete:
@@ -154,5 +159,3 @@ class EventHandler():
     def on_ymax_changed(self, *args):
         print("changed")
         self.app.ymin.set_range(0, self.app.ymax.get_value_as_int() - 1)
-
-
