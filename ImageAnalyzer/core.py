@@ -130,8 +130,8 @@ class ImageAnalyzer:
                     M=1,
                     ):
         """
-	initialization parameters for the analysis method ConditionalNRLHist
-		
+        initialization parameters for the analysis method ConditionalNRLHist
+
         :param beta: paramétre de regularité spaciale 
         :type beta: float
         :param sigmaH: paramétre de lissage de la HRF
@@ -148,7 +148,7 @@ class ImageAnalyzer:
         :type K: int
         :param M: nombre de coordonnées experimontales
         :type M: int
-	"""
+        """
         self.beta = beta
         self.sigmaH = sigmaH
         self.v_h = v_h_facture * sigmaH
@@ -175,9 +175,9 @@ class ImageAnalyzer:
     #####################
     def set_flags(self, pl=1, save=0, savepl=1, shower=0, nf=1):
         """
-	initialization parameters for saving results		
-		
-	:param pl: low frequency component 
+        initialization parameters for saving results		
+
+        :param pl: low frequency component 
         :type pl: int
         :param save: variable to indicate the state of outputs
         :type save: int 
@@ -207,9 +207,9 @@ class ImageAnalyzer:
                 scale=1,
                 ):
         """
-	allow to generate figures	
-		
-	:param nItMin: Minimum number of iteration
+        allow to generate figures	
+
+        :param nItMin: Minimum number of iteration
         :type nItMin: int
         :param nItMax: Maximum number of iteration
         :type nItMax: int 
@@ -228,7 +228,8 @@ class ImageAnalyzer:
         labelFields = {}
         cNames = ['inactiv', 'activ']
         spConf = RegularLatticeMapping((self.height, self.width, 1))
-        graph = graph_from_lattice(ones((self.height, self.width, 1), dtype=int))
+        graph = graph_from_lattice(
+            ones((self.height, self.width, 1), dtype=int))
         J = self.Y.shape[0]
         l = int(sqrt(J))
 
@@ -314,11 +315,11 @@ class ImageAnalyzer:
         if self.shower == 1:
             show()
         return fgs
-        
+
     def gen_nrl(self):
         """
         generation of nrl figures
-        
+
         :param hh:
         :type hh:
         :param z1:

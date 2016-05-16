@@ -12,11 +12,12 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
-from .core import ImageAnalyzer
-from .eventHandler import EventHandler
+#from .core import ImageAnalyzer
+from EventHandler import EventHandler
 
 # imageList.set_sort_func(lambda r1, r2, data, notify_destroy: return -1, None, False)
-# imageList.set_filter_func(lambda r, r2, data, notify_destroy: return True, None, False)
+# imageList.set_filter_func(lambda r, r2, data, notify_destroy: return
+# True, None, False)
 
 
 class App:
@@ -30,7 +31,7 @@ class App:
 
     def __init__(self):
         """recuperation of graphical object"""
-        self.builder = Gtk.Builder()   
+        self.builder = Gtk.Builder()
 
         glade_file = os.path.join(os.path.dirname(__file__), 'app.glade')
         self.builder.add_from_file(glade_file)
@@ -40,11 +41,13 @@ class App:
 
         self.imageList = self.builder.get_object("listbox1")
         self.imageScrolled = self.builder.get_object('scrolledwindow2')
-        self.imageList.connect('row-activated', lambda w, row: self.show_image(row.data))
+        self.imageList.connect('row-activated', lambda w,
+                               row: self.show_image(row.data))
 
         self.resultList = self.builder.get_object("listbox2")
         self.resultScrolled = self.builder.get_object('scrolledwindow1')
-        self.resultList.connect('row-activated', lambda w, row: self.show_result(row.data))
+        self.resultList.connect('row-activated', lambda w,
+                                row: self.show_result(row.data))
 
         self.search = self.builder.get_object('searchentry1')
         self.imageList.set_filter_func(self.filter_images, self.search)
@@ -55,6 +58,8 @@ class App:
         self.ymax = self.builder.get_object('ymax2')
         self.facteur = self.builder.get_object('facteur')
         self.bande = self.builder.get_object('bande')
+
+        self.adjustment_facteur = self.builder.get_object('adjustment_facteur')
 
         self.notebook = self.builder.get_object('notebook1')
         self.imageBox = self.builder.get_object('scrolledwindow5')
@@ -73,6 +78,23 @@ class App:
         self.scale = self.builder.get_object('scale')
         self.pl = self.builder.get_object('pl')
         self.shape = (0, 5000)
+
+        self.details = self.builder.get_object('button_details')
+
+        self.window_details = self.builder.get_object('window_details')
+        self.window_details.connect(
+            'delete_event', lambda w, e: w.hide() or True)
+        self.ttp = self.builder.get_object('ttp')
+        self.MaxH = self.builder.get_object('MaxH')
+        self.indMaxH = self.builder.get_object('indMaxH')
+        self.mid = self.builder.get_object('mid')
+        self.IndUnder = self.builder.get_object('IndUnder')
+        self.Under = self.builder.get_object('Under')
+        self.tmp1 = self.builder.get_object('tmp1')
+        self.tmp2 = self.builder.get_object('tmp2')
+        self.ind1 = self.builder.get_object('ind1')
+        self.ind2 = self.builder.get_object('ind2')
+        self.FWHM = self.builder.get_object('FWHM')
 
     def run(self):
         """connect signals and run Gtk window"""
@@ -111,8 +133,10 @@ class App:
             pyplot.close(fig)
 
             self.shape = img.asarray().shape
-            self.xmax.set_range(self.xmin.get_value_as_int() + 1, self.shape[0])
-            self.ymax.set_range(self.ymin.get_value_as_int() + 1, self.shape[1])
+            self.xmax.set_range(
+                self.xmin.get_value_as_int() + 1, self.shape[0])
+            self.ymax.set_range(
+                self.ymin.get_value_as_int() + 1, self.shape[1])
 
         self.imageScrolled.show_all()
 
@@ -123,7 +147,6 @@ class App:
         :param name: image file path
         :type name: str
         """
-
         i = 0
         while self.imageList.get_row_at_index(i):
             if self.imageList.get_row_at_index(i).data == name:
@@ -147,6 +170,25 @@ class App:
         :param names: image files path list
         :type names: array of str
         """
+
+        dialogWindow = Gtk.MessageDialog(self.win,
+                                         Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+                                         Gtk.MessageType.QUESTION,
+                                         Gtk.ButtonsType.OK_CANCEL,
+                                         "Veuilez choisir le facteur")
+
+        dialogWindow.set_title("Facteur")
+        dialogBox = dialogWindow.get_content_area()
+        userEntry = Gtk.SpinButton()
+        userEntry.set_adjustment(self.adjustment_facteur)
+        dialogBox.pack_end(userEntry, False, False, 0)
+        dialogWindow.show_all()
+        response = dialogWindow.run()
+        text = userEntry.get_value_as_int()
+        dialogWindow.destroy()
+        if (response == Gtk.ResponseType.OK):
+            self.facteur.set_text(str(text))
+        # self.window_facteur.show_all()
         for name in names:
             self.add_image(name)
         self.imageList.show_all()
@@ -168,9 +210,9 @@ class App:
 
     def show_result(self, fig):
         """show data image on resultScrolled
-        
+
         :param fig: figure result from list
-        :type fig: matplotlib.figure.Figure 
+        :type fig: matplotlib.figure.Figure
         """
         old_viewport = self.resultScrolled.get_child()
         if old_viewport:
@@ -183,7 +225,7 @@ class App:
         toolbar = NavigationToolbar(canvas, self.win)
         self.resultBox.add_with_viewport(toolbar)
         self.resultScrolled.show_all()
-        
+
 if __name__ == '__main__':
     app = App()
     app.run()

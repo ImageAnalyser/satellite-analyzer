@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import os
+
+from math import pi, sqrt
+from numpy import (
+    arange, array, power, exp, asarray, float64, zeros, ones, linspace, eye
+)
+from pylab import (
+    show, legend, hold, matshow, colorbar, reshape, savefig, std, mean, title,
+    plot, figure, find, figtext, suptitle
+)
+
+from scipy import stats
+from matplotlib.pyplot import get_cmap, cm, subplots
+from pyhrf.boldsynth.hrf import getCanoHRF
+from pyhrf.graph import graph_from_lattice
+from pyhrf.vbjde.Utils import Main_vbjde_Extension_TD
+from pyhrf.boldsynth.boldsynth.scenarios import RegularLatticeMapping
+import pyhrf.verbose
+from tifffile import imread
+
+
+class Resultat:
+
+     def set_flags(self, pl=1, save=0, savepl=1, shower=0, nf=1):
+        """
+	    initialization parameters for saving results
+		:param pl: low frequency component
+        :type pl: int
+        :param save: variable to indicate the state of outputs
+        :type save: int
+        :param savepl: pl are saved in the directory OUTDIR
+        :type savepl: int
+        :param shower: show or not images results
+        :type shower: int
+        :param nf: int
+        :type nf: int
+        """
+        # pl =0 sans PL ,pl =1 avec PL
+        self.pl = pl
+        # save = 1  les outputs sont sauvgardés
+        self.save = save
+        # savepl les PL sont sauvgardés dans le repertoir outDir
+        self.savepl = savepl
+        self.shower = shower
+
+        self.nf = nf
+
+	def Res_Hrf(self):
+        if self.shower == 1:
+		    fgs = Analyseur.gen_hrf()
+        show()
+
+    def Res_nrl(self):
+        if self.shower == 1:
+            fgs = Analyseur.gen_nrl()
+            show()	
