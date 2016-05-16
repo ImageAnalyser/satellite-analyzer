@@ -1,0 +1,636 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to Satellite-Analyzer’s documentation! &mdash; Satellite-Analyzer 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Satellite-Analyzer 0.1 documentation" href="#" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-satellite-analyzer-s-documentation">
+<h1>Welcome to Satellite-Analyzer&#8217;s documentation!<a class="headerlink" href="#welcome-to-satellite-analyzer-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<span class="target" id="module-ImageAnalyzer.app"></span><p>Gtk Interface for Image Analyzer using glade template</p>
+<dl class="class">
+<dt id="ImageAnalyzer.app.App">
+<em class="property">class </em><code class="descclassname">ImageAnalyzer.app.</code><code class="descname">App</code><a class="reference internal" href="_modules/ImageAnalyzer/app.html#App"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.app.App" title="Permalink to this definition">¶</a></dt>
+<dd><p>main logic for the graphical interface</p>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">App</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="ImageAnalyzer.app.App.add_image">
+<code class="descname">add_image</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/app.html#App.add_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.app.App.add_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add image to image list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) &#8211; image file path</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.app.App.add_images">
+<code class="descname">add_images</code><span class="sig-paren">(</span><em>names</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/app.html#App.add_images"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.app.App.add_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add images to image list then show last one</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>names</strong> (<em>array of str</em>) &#8211; image files path list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.app.App.add_result">
+<code class="descname">add_result</code><span class="sig-paren">(</span><em>name</em>, <em>fig</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/app.html#App.add_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.app.App.add_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>add new row with name of image and save object fig on attr data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; path of file to added</li>
+<li><strong>fig</strong> (<em>matplotlib.figure.Figure</em>) &#8211; l&#8217;objet figure genereté par imread</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.app.App.filter_images">
+<code class="descname">filter_images</code><span class="sig-paren">(</span><em>row</em>, <em>search</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/app.html#App.filter_images"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.app.App.filter_images" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.app.App.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/app.html#App.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.app.App.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>connect signals and run Gtk window</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.app.App.show_image">
+<code class="descname">show_image</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/app.html#App.show_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.app.App.show_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show image on image view</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) &#8211; image file path</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.app.App.show_result">
+<code class="descname">show_result</code><span class="sig-paren">(</span><em>fig</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/app.html#App.show_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.app.App.show_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>show data image on resultScrolled</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fig</strong> (<em>matplotlib.figure.Figure</em>) &#8211; figure result from list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ImageAnalyzer.Data"></span><dl class="class">
+<dt id="ImageAnalyzer.Data.Data">
+<em class="property">class </em><code class="descclassname">ImageAnalyzer.Data.</code><code class="descname">Data</code><span class="sig-paren">(</span><em>images=[]</em>, <em>bande=0</em>, <em>facteur=1000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Data.html#Data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Data.Data" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>initialisation des paramètres de lecture data</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>image</strong> (<em>[]</em>) &#8211; liste de data</li>
+<li><strong>bande</strong> (<em>int</em>) &#8211; paramétre de configuration</li>
+<li><strong>facteur</strong> (<em>int</em>) &#8211; paramètre de configuration facteur</li>
+<li><strong>xmin</strong> (<em>int</em>) &#8211; valeur minimale largeur</li>
+<li><strong>xmax</strong> (<em>int</em>) &#8211; valeur maximale largeur</li>
+<li><strong>ymin</strong> (<em>int</em>) &#8211; valeur minimale hauteur</li>
+<li><strong>ymax</strong> (<em>int</em>) &#8211; valeur maximale hauteur</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="ImageAnalyzer.Data.Data.bande">
+<code class="descname">bande</code><a class="headerlink" href="#ImageAnalyzer.Data.Data.bande" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.Data.Data.facteur">
+<code class="descname">facteur</code><a class="headerlink" href="#ImageAnalyzer.Data.Data.facteur" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.Data.Data.getheight">
+<code class="descname">getheight</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Data.html#Data.getheight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Data.Data.getheight" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.Data.Data.getwidth">
+<code class="descname">getwidth</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Data.html#Data.getwidth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Data.Data.getwidth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.Data.Data.lecture_data">
+<code class="descname">lecture_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Data.html#Data.lecture_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Data.Data.lecture_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>méthode qui assure la lecture de image</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.Data.Data.xmax">
+<code class="descname">xmax</code><a class="headerlink" href="#ImageAnalyzer.Data.Data.xmax" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.Data.Data.xmin">
+<code class="descname">xmin</code><a class="headerlink" href="#ImageAnalyzer.Data.Data.xmin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.Data.Data.ymax">
+<code class="descname">ymax</code><a class="headerlink" href="#ImageAnalyzer.Data.Data.ymax" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.Data.Data.ymin">
+<code class="descname">ymin</code><a class="headerlink" href="#ImageAnalyzer.Data.Data.ymin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ImageAnalyzer.EventData"></span><dl class="class">
+<dt id="ImageAnalyzer.EventData.EventData">
+<em class="property">class </em><code class="descclassname">ImageAnalyzer.EventData.</code><code class="descname">EventData</code><span class="sig-paren">(</span><em>app</em>, <em>imgs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventData.html#EventData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventData.EventData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signal Event Data definition</p>
+<dl class="method">
+<dt id="ImageAnalyzer.EventData.EventData.on_exec_clicked_data">
+<code class="descname">on_exec_clicked_data</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventData.html#EventData.on_exec_clicked_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventData.EventData.on_exec_clicked_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recupération de données a partir de la vue app
+et l&#8217;execution de data
+:param imgs:liste d&#8217;image
+:type imgs:[]</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ImageAnalyzer.Analyseur"></span><dl class="class">
+<dt id="ImageAnalyzer.Analyseur.Analyseur">
+<em class="property">class </em><code class="descclassname">ImageAnalyzer.Analyseur.</code><code class="descname">Analyseur</code><span class="sig-paren">(</span><em>data</em>, <em>scen</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Analyseur.html#Analyseur"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Analyseur.Analyseur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyser les scénarios d&#8217;analyse avec les data en entrées
+:param width: largeur en sortie
+:type width: int
+:param height: hauteur en sortie
+:int height: int</p>
+<dl class="method">
+<dt id="ImageAnalyzer.Analyseur.Analyseur.ConditionalNRLHist">
+<code class="descname">ConditionalNRLHist</code><span class="sig-paren">(</span><em>nrls</em>, <em>labels</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Analyseur.html#Analyseur.ConditionalNRLHist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Analyseur.Analyseur.ConditionalNRLHist" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>Analyze method</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nrls</strong> &#8211; </li>
+<li><strong>labels</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Resultlist of figures</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.Analyseur.Analyseur.gaussian">
+<code class="descname">gaussian</code><span class="sig-paren">(</span><em>x</em>, <em>mu</em>, <em>sig</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Analyseur.html#Analyseur.gaussian"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Analyseur.Analyseur.gaussian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.Analyseur.Analyseur.gen_hrf">
+<code class="descname">gen_hrf</code><span class="sig-paren">(</span><em>estimateSigmaH=0</em>, <em>Onsets={'nuages': array([0])}</em>, <em>nItmax=30</em>, <em>nItmin=30</em>, <em>estimateBeta=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Analyseur.html#Analyseur.gen_hrf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Analyseur.Analyseur.gen_hrf" title="Permalink to this definition">¶</a></dt>
+<dd><p>allow to generate figures</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>nItMin</strong> (<em>int</em>) &#8211; Minimum number of iteration</li>
+<li><strong>nItMax</strong> (<em>int</em>) &#8211; Maximum number of iteration</li>
+<li><strong>estimateSigmaH</strong> (<em>int</em>) &#8211; estimation of sigmaH</li>
+<li><strong>estimateBeta</strong> (<em>int</em>) &#8211; estimation of Beta</li>
+<li><strong>scale</strong> (<em>int</em>) &#8211; scale factor</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.Analyseur.Analyseur.gen_nrl">
+<code class="descname">gen_nrl</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Analyseur.html#Analyseur.gen_nrl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Analyseur.Analyseur.gen_nrl" title="Permalink to this definition">¶</a></dt>
+<dd><p>generation of nrl figures</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>hh</strong> &#8211; </li>
+<li><strong>z1</strong> &#8211; </li>
+<li><strong>z2</strong> &#8211; </li>
+<li><strong>fg</strong> &#8211; </li>
+<li><strong>fig</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.Analyseur.Analyseur.set_flags">
+<code class="descname">set_flags</code><span class="sig-paren">(</span><em>pl=1</em>, <em>save=0</em>, <em>savepl=1</em>, <em>shower=0</em>, <em>nf=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Analyseur.html#Analyseur.set_flags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Analyseur.Analyseur.set_flags" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><dl class="docutils">
+<dt>initialization parameters for saving results                </dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">param pl:</th><td class="field-body">low frequency component</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>save</strong> (<em>int</em>) &#8211; variable to indicate the state of outputs</li>
+<li><strong>savepl</strong> (<em>int</em>) &#8211; pl are saved in the directory OUTDIR</li>
+<li><strong>shower</strong> (<em>int</em>) &#8211; show or not images results</li>
+<li><strong>nf</strong> (<em>int</em>) &#8211; int</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ImageAnalyzer.EventAnalyseur"></span><dl class="class">
+<dt id="ImageAnalyzer.EventAnalyseur.EventAnalyseur">
+<em class="property">class </em><code class="descclassname">ImageAnalyzer.EventAnalyseur.</code><code class="descname">EventAnalyseur</code><span class="sig-paren">(</span><em>app</em>, <em>data</em>, <em>Scenario</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventAnalyseur.html#EventAnalyseur"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventAnalyseur.EventAnalyseur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signal Event Analyseur definition</p>
+<dl class="method">
+<dt id="ImageAnalyzer.EventAnalyseur.EventAnalyseur.on_exec_clicked_analyse">
+<code class="descname">on_exec_clicked_analyse</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventAnalyseur.html#EventAnalyseur.on_exec_clicked_analyse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventAnalyseur.EventAnalyseur.on_exec_clicked_analyse" title="Permalink to this definition">¶</a></dt>
+<dd><p>génération des résultats sous forme de figure</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ImageAnalyzer.scenario"></span><dl class="class">
+<dt id="ImageAnalyzer.scenario.scenario">
+<em class="property">class </em><code class="descclassname">ImageAnalyzer.scenario.</code><code class="descname">scenario</code><a class="reference internal" href="_modules/ImageAnalyzer/scenario.html#scenario"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.scenario.scenario" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>initialization parameters for the analysis method ConditionalNRLHist</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>beta</strong> (<em>float</em>) &#8211; paramétre de regularité spaciale</li>
+<li><strong>sigmaH</strong> (<em>float</em>) &#8211; paramétre de lissage de la HRF</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>:param v_h_facteur:hyper parametre 
+:type v_h_facture: float
+:param dt: pas d&#8217;echelle Temporel de la HRF
+:type dt: float   
+:param Thrf: durée
+:type Thrf: int
+:param TR: temps de repetition
+:type TR: int
+:param K: nombre de class
+:type K: int
+:param M: nombre de coordonnées experimontales
+:type M: int</p>
+<dl class="attribute">
+<dt id="ImageAnalyzer.scenario.scenario.M">
+<code class="descname">M</code><a class="headerlink" href="#ImageAnalyzer.scenario.scenario.M" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.scenario.scenario.TR">
+<code class="descname">TR</code><a class="headerlink" href="#ImageAnalyzer.scenario.scenario.TR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.scenario.scenario.Thrf">
+<code class="descname">Thrf</code><a class="headerlink" href="#ImageAnalyzer.scenario.scenario.Thrf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.scenario.scenario.beta">
+<code class="descname">beta</code><a class="headerlink" href="#ImageAnalyzer.scenario.scenario.beta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.scenario.scenario.dt">
+<code class="descname">dt</code><a class="headerlink" href="#ImageAnalyzer.scenario.scenario.dt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.scenario.scenario.k">
+<code class="descname">k</code><a class="headerlink" href="#ImageAnalyzer.scenario.scenario.k" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.scenario.scenario.scale">
+<code class="descname">scale</code><a class="headerlink" href="#ImageAnalyzer.scenario.scenario.scale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.scenario.scenario.sigmaH">
+<code class="descname">sigmaH</code><a class="headerlink" href="#ImageAnalyzer.scenario.scenario.sigmaH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.scenario.scenario.v_h_facteur">
+<code class="descname">v_h_facteur</code><a class="headerlink" href="#ImageAnalyzer.scenario.scenario.v_h_facteur" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ImageAnalyzer.EventScenario"></span><dl class="class">
+<dt id="ImageAnalyzer.EventScenario.EventScenario">
+<em class="property">class </em><code class="descclassname">ImageAnalyzer.EventScenario.</code><code class="descname">EventScenario</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventScenario.html#EventScenario"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventScenario.EventScenario" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signal Event scenario definition</p>
+<dl class="method">
+<dt id="ImageAnalyzer.EventScenario.EventScenario.on_exec_scenario">
+<code class="descname">on_exec_scenario</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventScenario.html#EventScenario.on_exec_scenario"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventScenario.EventScenario.on_exec_scenario" title="Permalink to this definition">¶</a></dt>
+<dd><p>Récupération des paramètres d&#8217;analyse</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ImageAnalyzer.Resultat"></span><dl class="class">
+<dt id="ImageAnalyzer.Resultat.Resultat">
+<em class="property">class </em><code class="descclassname">ImageAnalyzer.Resultat.</code><code class="descname">Resultat</code><span class="sig-paren">(</span><em>hrf</em>, <em>nrl</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Resultat.html#Resultat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Resultat.Resultat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Affichage des Résultats
+:param hrf: liste des figures HRF
+:type hrf: []
+:param Nrl: liste des figures NRL
+:type Nrl: []</p>
+<dl class="method">
+<dt id="ImageAnalyzer.Resultat.Resultat.Res_Hrf">
+<code class="descname">Res_Hrf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Resultat.html#Resultat.Res_Hrf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Resultat.Resultat.Res_Hrf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resultat de la HRF</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.Resultat.Resultat.Res_nrl">
+<code class="descname">Res_nrl</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/Resultat.html#Resultat.Res_nrl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.Resultat.Resultat.Res_nrl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resultat de la NRL</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ImageAnalyzer.EventResultat"></span><dl class="class">
+<dt id="ImageAnalyzer.EventResultat.EventResultat">
+<em class="property">class </em><code class="descclassname">ImageAnalyzer.EventResultat.</code><code class="descname">EventResultat</code><span class="sig-paren">(</span><em>app</em>, <em>Resultat</em>, <em>Analys</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventResultat.html#EventResultat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventResultat.EventResultat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signal Event Resultat definition</p>
+<dl class="method">
+<dt id="ImageAnalyzer.EventResultat.EventResultat.on_exec_result">
+<code class="descname">on_exec_result</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventResultat.html#EventResultat.on_exec_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventResultat.EventResultat.on_exec_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execution de résultat</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-ImageAnalyzer.EventHandler"></span><dl class="class">
+<dt id="ImageAnalyzer.EventHandler.EventHandler">
+<em class="property">class </em><code class="descclassname">ImageAnalyzer.EventHandler.</code><code class="descname">EventHandler</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signal Event handlers definition</p>
+<dl class="attribute">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.fgs">
+<code class="descname">fgs</code><em class="property"> = []</em><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.fgs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.fgs1">
+<code class="descname">fgs1</code><em class="property"> = []</em><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.fgs1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_about_clicked">
+<code class="descname">on_about_clicked</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_about_clicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_about_clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>show about dialog</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_about_closed">
+<code class="descname">on_about_closed</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_about_closed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_about_closed" title="Permalink to this definition">¶</a></dt>
+<dd><p>close about dialog</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_add_clicked">
+<code class="descname">on_add_clicked</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_add_clicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_add_clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launch multi-select image file chooser dialog and append new files
+to the image list and show last selected file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_clear_clicked">
+<code class="descname">on_clear_clicked</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_clear_clicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_clear_clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>clear images list and image view
+recuperation of default value from graphical object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_details_clicked">
+<code class="descname">on_details_clicked</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_details_clicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_details_clicked" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_exec_clicked">
+<code class="descname">on_exec_clicked</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_exec_clicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_exec_clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>analyser les images importées</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_facteur_ok">
+<code class="descname">on_facteur_ok</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_facteur_ok"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_facteur_ok" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_item_delete">
+<code class="descname">on_item_delete</code><span class="sig-paren">(</span><em>widget</em>, <em>ev</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_item_delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_item_delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_quit_clicked">
+<code class="descname">on_quit_clicked</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_quit_clicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_quit_clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>clean and close the app</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_search_changed">
+<code class="descname">on_search_changed</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_search_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_search_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_xmax_changed">
+<code class="descname">on_xmax_changed</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_xmax_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_xmax_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_xmin_changed">
+<code class="descname">on_xmin_changed</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_xmin_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_xmin_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_ymax_changed">
+<code class="descname">on_ymax_changed</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_ymax_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_ymax_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ImageAnalyzer.EventHandler.EventHandler.on_ymin_changed">
+<code class="descname">on_ymin_changed</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ImageAnalyzer/EventHandler.html#EventHandler.on_ymin_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ImageAnalyzer.EventHandler.EventHandler.on_ymin_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span>Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to Satellite-Analyzer&#8217;s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Imen Felhi & Kawther Fki.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/index.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
