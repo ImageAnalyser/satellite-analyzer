@@ -46,7 +46,7 @@ class scenario:
     def __init__(self):
         self._beta = 0.1
         self._sigmaH = 0.01
-        self._v_h_facteur = 0.1 * self._sigmaH
+        #self._v_h_facteur = 0.1 * self._sigmaH
         self._dt = 1
         self._Thrf = 4
         self._TR = 1

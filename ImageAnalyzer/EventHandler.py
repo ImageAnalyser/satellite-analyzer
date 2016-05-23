@@ -40,13 +40,13 @@ class EventHandler():
         old_viewport = self.app.resultScrolled.get_child()
         if old_viewport:
             old_viewport.destroy()
-        self.app.xmin.set_value(2658)
+        self.app.xmin.set_value(2660)
         self.app.xmax.set_value(2730)
         self.app.ymin.set_value(2600)
         self.app.ymax.set_value(2680)
         self.app.beta.set_value(0.1)
         self.app.sigmah.set_value(0.01)
-        self.app.vh.set_value(0.1)
+        self.app.vh.set_value(0.001)
         self.app.dt.set_value(1)
         self.app.thrf.set_value(4)
         self.app.tr.set_value(1)
@@ -108,6 +108,8 @@ class EventHandler():
             old_viewport.destroy()
 
         imgs = []
+        f1 = []
+        f2 = []
         i = 0
 
         while self.app.imageList.get_row_at_index(i):
@@ -115,13 +117,21 @@ class EventHandler():
             i += 1
         EvenD = EventData(self.app, imgs)
         data = EvenD.on_exec_clicked_data()
+        
         EvenS = EventScenario(self.app)
         Scen = EvenS.on_exec_scenario()
-        EvenA = EventAnalyseur(self.app, data, Scen)
-        Res, Analys = EvenA.on_exec_clicked_analyse()
-        EvenR = EventResultat(self.app, Res, Analys)
+        
+        pre = Pre_Traitement(data, Scen)
+        analy = Analyseur(pre, Scen, data)
+        
+        EvenA = EventAnalyseur(self.app, analy)
+        Analys = EvenA.on_exec_clicked_analyse()
+        
+        Res = Resultat(data, Scen, analy)
+        
+        EvenR = EventResultat(self.app, Res, analy, data, Scen, pre)
         EvenR.on_exec_result()
-
+          
     def on_item_delete(self, widget, ev, *args):
         if ev.keyval == Gdk.KEY_Delete:
             r = self.app.imageList.get_selected_row()

@@ -44,14 +44,24 @@ class Data:
     def __init__(self,
                  images=[],
                  bande=0,
-                 facteur=1000):
+                 facteur=1000,
+                 centred=0,      
+                 verbosity=2,
+                ):
         self.images = images
         self._bande = bande
         self._facteur = facteur
+        self._centred = centred      
+        self._verbosity = verbosity
+        pyhrf.verbose.set_verbosity(verbosity)
 
     @property
     def xmin(self):
         return self._xmin
+    
+    @property
+    def centred(self):
+        return self._centred
 
     @property
     def xmax(self):
@@ -102,8 +112,8 @@ class Data:
         return self.width
     
     def getheight(self):
-	    self.height = self.xmax - self.xmin
-	    return self.height	
+	   self.height = self.xmax - self.xmin
+	   return self.height	
         
     def lecture_data(self):
         """méthode qui assure la lecture de image"""
@@ -112,15 +122,21 @@ class Data:
         #Y = []
         images = self.images[start:end]
         signal = []
-        for image in self.images:
+        for image in images:
             print(image)
             labels = imread(image)
             labels = labels[self.xmin:self.xmax, self.ymin:self.ymax, self.bande].astype(float)
             if (self.facteur > 1):
                 labels = labels / self.facteur
             signal.append(labels.flatten())
-        self.Y = asarray(signal)
-        #self.Y1 = self.Post_lecture(self.Y)
-        return self.Y
-        
+            self.Y = asarray(signal)
+            
+    def post_lecture(self):
+        STD = std(self.Y, 1)
+        MM = mean(self.Y, 1)
+        TT, self.NN = self.Y.shape
+        if self.centred:
+            for t in xrange(0, TT):
+                self.Y[t, :] = (self.Y[t, :] - MM[t]) / STD[t]
+        return self.Y    
         

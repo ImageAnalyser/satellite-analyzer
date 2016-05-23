@@ -77,6 +77,7 @@ class App:
         self.k = self.builder.get_object('k')
         self.scale = self.builder.get_object('scale')
         self.pl = self.builder.get_object('pl')
+        #self.v_h_facteur = self.builder.get_object('vh')
         self.shape = (0, 5000)
 
         self.details = self.builder.get_object('button_details')
@@ -87,14 +88,14 @@ class App:
         self.ttp = self.builder.get_object('ttp')
         self.MaxH = self.builder.get_object('MaxH')
         self.indMaxH = self.builder.get_object('indMaxH')
-        self.mid = self.builder.get_object('mid')
-        self.IndUnder = self.builder.get_object('IndUnder')
-        self.Under = self.builder.get_object('Under')
+        #self.mid = self.builder.get_object('mid')
+        #self.IndUnder = self.builder.get_object('IndUnder')
+        #self.Under = self.builder.get_object('Under')
         self.tmp1 = self.builder.get_object('tmp1')
-        self.tmp2 = self.builder.get_object('tmp2')
-        self.ind1 = self.builder.get_object('ind1')
-        self.ind2 = self.builder.get_object('ind2')
-        self.FWHM = self.builder.get_object('FWHM')
+        #self.tmp2 = self.builder.get_object('tmp2')
+        #self.ind1 = self.builder.get_object('ind1')
+        #self.ind2 = self.builder.get_object('ind2')
+        #self.FWHM = self.builder.get_object('FWHM')
 
     def run(self):
         """connect signals and run Gtk window"""
